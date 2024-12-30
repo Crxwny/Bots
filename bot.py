@@ -28,19 +28,16 @@ def run_discord_bot():
             return
 
         username = str(message.author)
-        user_message = str(message.content).strip()  # Remove extra spaces
+        user_message = str(message.content)
         channel = str(message.channel)
 
         print(f"{username} said: '{user_message}' in {channel}")
 
-        # Check if the message is not empty
-        if not user_message:
-            return
-
         if user_message[0] == '?':
             user_message = user_message[1:]
             await send_message(message, user_message, True)
-        else:
+        elif user_message[0] == '!':
+            user_message = user_message[1:]
             await send_message(message, user_message, False)
 
     client.run(TOKEN)
